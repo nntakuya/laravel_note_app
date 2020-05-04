@@ -1,0 +1,33 @@
+version: "3"
+services:
+  web:
+    container_name: note_web
+    image: nginx:1.17
+    ports:
+      - 80:80
+    volumes:
+      - ./docker/web/default.conf:/etc/nginx/conf.d/default.conf
+      - ./src:/var/www/html
+    depends_on:
+      - app
+  app:
+    container_name: note_app
+    build: ./docker/app
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - db
+  db:
+    container_name: note_db
+    image: mysql:8.0
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: note_db
+    volumes:
+      - ./docker/mysql/db-data:/var/lib/mysql
+    
+
