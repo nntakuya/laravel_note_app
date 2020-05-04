@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Note;
 
 class NoteController extends Controller
 {
@@ -11,9 +12,11 @@ class NoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Note $note)
     {
-        return view('note.index');
+        $notes = $note->all();
+
+        return view('note.index', compact('notes'));
     }
 
     /**
