@@ -1,7 +1,7 @@
 FROM php:7.4-fpm-alpine
 
 RUN apk --update add \
-    && apk add build-base curl git zip unzip vim
+    && apk add build-base curl git zip unzip vim npm
 
 RUN cd /usr/bin && curl -sS https://getcomposer.org/installer | php && ln -s /usr/bin/composer.phar /usr/bin/composer
 
